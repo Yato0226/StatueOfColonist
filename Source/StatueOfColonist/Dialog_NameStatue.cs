@@ -22,7 +22,7 @@ namespace StatueOfColonist
       this.statue = statue;
       if (statue.name == null)
         statue.name = "";
-      this.optionalTitle = TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.CommandRenameLabel"));
+this.optionalTitle = Translator.Translate("StatueOfColonist.CommandRenameLabel");
       this.curName = statue.name;
       this.forcePause = true;
       this.closeOnAccept = false;
@@ -30,17 +30,17 @@ namespace StatueOfColonist
       this.absorbInputAroundWindow = true;
     }
 
-    public virtual void DoWindowContents(Rect rect)
+    public override void DoWindowContents(Rect rect)
     {
       Text.Font = (GameFont) 1;
       bool flag = false;
-      if (Event.current.type == 4 && Event.current.keyCode == 13)
+if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
       {
         flag = true;
         Event.current.Use();
       }
-      this.curName = Widgets.TextField(new Rect(0.0f, 0.0f, (float) ((double) ((Rect) ref rect).width / 2.0 - 20.0), 35f), this.curName);
-      if (!(Widgets.ButtonText(new Rect((float) ((double) ((Rect) ref rect).width / 2.0 + 20.0), 0.0f, (float) ((double) ((Rect) ref rect).width / 2.0 - 20.0), 35f), TaggedString.op_Implicit(Translator.Translate("OK")), true, false, true, new TextAnchor?()) | flag))
+    this.curName = Widgets.TextField(new Rect(0.0f, 0.0f, (float)(rect.width / 2.0 - 20.0), 35f), this.curName);
+      if (!(Widgets.ButtonText(new Rect((float)(rect.width / 2.0 + 20.0), 0.0f, (float)(rect.width / 2.0 - 20.0), 35f), Translator.Translate("OK"), true, false, true, new TextAnchor?()) | flag))
         return;
       this.statue.name = this.curName;
       Find.WindowStack.TryRemove((Window) this, true);

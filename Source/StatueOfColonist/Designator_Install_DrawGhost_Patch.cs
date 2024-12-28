@@ -32,9 +32,9 @@ namespace StatueOfColonist
         return true;
       Rot4 rot4 = traverse.Field("placingRot").GetValue<Rot4>();
       Vector3 vector3 = GenThing.TrueCenter(UI.MouseCell(), rot4, ((BuildableDef) statueOfColonist.Def).Size, Altitudes.AltitudeFor((AltitudeLayer) 24));
-      Vector3 rootLoc = Vector3.op_Addition(vector3, new Vector3(statueOfColonist.Def.offsetX, 0.0f, statueOfColonist.Def.offsetZ));
+      Vector3 rootLoc = vector3 + new Vector3(statueOfColonist.Def.offsetX, 0.0f, statueOfColonist.Def.offsetZ);
       AcceptanceReport acceptanceReport = ((Designator) __instance).CanDesignateCell(UI.MouseCell());
-      int num = ((AcceptanceReport) ref acceptanceReport).Accepted ? 1 : 0;
+      int num = acceptanceReport.Accepted ? 1 : 0;
       Building_StatueOfColonist.RenderMode mode = Building_StatueOfColonist.RenderMode.CanDesignateGhost;
       if (num == 0)
         mode = Building_StatueOfColonist.RenderMode.CanNotDesignateGhost;
@@ -43,8 +43,8 @@ namespace StatueOfColonist
       {
         Graphic innerGraphicFor = GraphicUtility.ExtractInnerGraphicFor(thing.Graphic, thing, new int?());
         IntVec3 intVec3 = IntVec3Utility.ToIntVec3(vector3);
-        if (IntVec2.op_Equality(statueOfColonist.Def.size, new IntVec2(2, 2)))
-          intVec3 = IntVec3.op_Addition(intVec3, new IntVec3(-1, 0, -1));
+        if (statueOfColonist.Def.size == new IntVec2(2, 2))
+          intVec3 += new IntVec3(-1, 0, -1);
         GhostDrawer.DrawGhostThing(intVec3, Rot4.North, (ThingDef) ((Designator_Place) __instance).PlacingDef, innerGraphicFor, ghostCol, (AltitudeLayer) 24, (Thing) null, true, (ThingDef) null);
       }
       return false;
