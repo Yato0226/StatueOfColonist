@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\louiz\source\repos\Statue of colonist\1.5\Assemblies\StatueOfColonist.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4EC66EB7-4D21-4588-AA6C-3A2C152CB4AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>StatueOfColonist</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>StatueOfColonist</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddMenuOption.cs" />
+    <Compile Include="BluePrint_TMBStatue.cs" />
+    <Compile Include="Building_StatueOfColonist.cs" />
+    <Compile Include="Dialog_AddOptionLister.cs" />
+    <Compile Include="Dialog_NameStatue.cs" />
+    <Compile Include="Dialog_PresetList.cs" />
+    <Compile Include="GeneData.cs" />
+    <Compile Include="GeneGraphic.cs" />
+    <Compile Include="ListingUtil.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Blueprint_Install_SpawnSetup_Patch.cs" />
+    <Compile Include="Blueprint_Install_DeSpawn_Patch.cs" />
+    <Compile Include="ThingWithComps_Draw_Patch.cs" />
+    <Compile Include="Designator_Install_DrawGhost_Patch.cs" />
+    <Compile Include="Graphics_Internal_DrawMesh_Patch.cs" />
+    <Compile Include="MinifiedStatueOfColonist.cs" />
+    <Compile Include="StatueGraphicGetter.cs" />
+    <Compile Include="StatueOfColonistApparelData.cs" />
+    <Compile Include="StatueOfColonistData.cs" />
+    <Compile Include="StatueOfColonistDef.cs" />
+    <Compile Include="StatueOfColonistGraphicSet.cs" />
+    <Compile Include="StatueOfColonistMod.cs" />
+    <Compile Include="StatueOfColonistPref.cs" />
+    <Compile Include="StatueOfColonistPrefData.cs" />
+    <Compile Include="StatueOfColonistPreset.cs" />
+    <Compile Include="StatueOfColonistRenderer.cs" />
+    <Compile Include="StatueOfColonistSettings.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Window_EditStatueGene.cs" />
+    <Compile Include="Window_EditStatue.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
