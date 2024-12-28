@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class StatueOfColonistPrefData : IExposable

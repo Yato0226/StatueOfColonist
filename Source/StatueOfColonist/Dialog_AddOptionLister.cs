@@ -11,7 +11,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   internal class Dialog_AddOptionLister : Window

@@ -6,7 +6,7 @@
 
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class GeneGraphic

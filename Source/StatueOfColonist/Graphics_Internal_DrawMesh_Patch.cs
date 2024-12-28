@@ -7,7 +7,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   [HarmonyPatch(typeof (Graphics))]

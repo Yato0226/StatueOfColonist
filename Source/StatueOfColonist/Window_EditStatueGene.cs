@@ -13,7 +13,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class Window_EditStatueGene : Window

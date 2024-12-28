@@ -8,7 +8,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   [HarmonyPatch(typeof (Blueprint_Install))]

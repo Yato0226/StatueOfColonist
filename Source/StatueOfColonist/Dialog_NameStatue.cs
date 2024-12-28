@@ -7,7 +7,7 @@
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class Dialog_NameStatue : Window

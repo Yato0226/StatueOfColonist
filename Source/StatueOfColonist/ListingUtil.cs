@@ -9,7 +9,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public static class ListingUtil

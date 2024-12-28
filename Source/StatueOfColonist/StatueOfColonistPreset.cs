@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class StatueOfColonistPreset : IExposable

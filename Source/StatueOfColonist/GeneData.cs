@@ -7,7 +7,7 @@
 using System.Collections.Generic;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class GeneData : IExposable

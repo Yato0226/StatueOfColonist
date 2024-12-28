@@ -12,7 +12,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class Building_StatueOfColonist : Building_Art

@@ -10,7 +10,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   internal class MinifiedStatueOfColonist : MinifiedThing

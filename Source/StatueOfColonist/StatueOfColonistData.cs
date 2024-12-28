@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public class StatueOfColonistData : IExposable

@@ -8,7 +8,6 @@ using HarmonyLib;
 using System.Reflection;
 using Verse;
 
-#nullable disable
 namespace StatueOfColonist
 {
   [StaticConstructorOnStartup]

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using Verse;
 
-#nullable disable
+ 
 namespace StatueOfColonist
 {
   public static class StatueOfColonistPref

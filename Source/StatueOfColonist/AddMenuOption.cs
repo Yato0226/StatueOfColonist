@@ -7,12 +7,17 @@
 using System;
 using Verse;
 
-#nullable disable
 namespace StatueOfColonist
 {
-  public struct AddMenuOption(ThingDef thingDef, Action method)
-  {
-    public ThingDef thingDef = thingDef;
-    public Action method = method;
-  }
+    public struct AddMenuOption
+    {
+        public ThingDef ThingDef { get; }
+        public Action Method { get; }
+
+        public AddMenuOption(ThingDef thingDef, Action method)
+        {
+            ThingDef = thingDef;
+            Method = method;
+        }
+    }
 }
