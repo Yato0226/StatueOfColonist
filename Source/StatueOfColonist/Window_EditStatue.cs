@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿﻿// Decompiled with JetBrains decompiler
 // Type: StatueOfColonist.Window_EditStatue
 // Assembly: StatueOfColonist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 7D39CEE1-1E34-4063-B520-8223C22194A1
@@ -76,19 +76,13 @@ namespace StatueOfColonist
     {
       Text.Font = (GameFont) 1;
       Rect rect1 = GenUI.ContractedBy(inRect, 10f);
-      Rect rect2;
-      // ISSUE: explicit constructor call
-      ((Rect) ref rect2).\u002Ector(((Rect) ref rect1).x, ((Rect) ref rect1).y, ((Rect) ref rect1).width, ((Rect) ref rect1).height);
+      Rect rect2 = new Rect(rect1.x, rect1.y, rect1.width, rect1.height);
       GUI.BeginGroup(rect2);
       Text.Font = (GameFont) 1;
       GUI.color = Color.white;
       Rect rect3 = new Rect(0.0f, 0.0f, ((Rect) ref rect2).width, ((Rect) ref rect2).height);
-      Rect rect4;
-      // ISSUE: explicit constructor call
-      ((Rect) ref rect4).\u002Ector(0.0f, 0.0f, ((Rect) ref rect2).width - 16f, this.scrollViewHeight);
-      ref Vector2 local = ref this.scrollPosition;
-      Rect rect5 = rect4;
-      Widgets.BeginScrollView(rect3, ref local, rect5, true);
+      Rect rect4 = new Rect(0.0f, 0.0f, rect2.width - 16f, this.scrollViewHeight);
+      Widgets.BeginScrollView(rect3, ref this.scrollPosition, rect4, true);
       float num1 = 0.0f;
       if (Widgets.ButtonText(new Rect(0.0f, num1, 140f, 28f), TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.CopyFromColonist")), true, true, true, new TextAnchor?()))
         this.CopyFromColonist();
@@ -236,7 +230,7 @@ namespace StatueOfColonist
       Widgets.Label(new Rect(0.0f, num9 + 2f, 150f, 28f), Translator.Translate("StatueOfColonist.BeardBlightnessOfStatue"));
       Rect rect6;
       // ISSUE: explicit constructor call
-      ((Rect) ref rect6).\u002Ector(150f, num9, 200f, 28f);
+      ((Rect) ref rect6).vector(150f, num9, 200f, 28f);
       double beardBlightness1 = (double) this.Statue.Data.beardBlightness;
       this.Statue.Data.beardBlightness = Widgets.HorizontalSlider(rect6, this.Statue.Data.beardBlightness, 0.0f, 1f, false, this.Statue.Data.beardBlightness.ToString(), (string) null, (string) null, 0.01f);
       double beardBlightness2 = (double) this.Statue.Data.beardBlightness;
@@ -300,7 +294,7 @@ namespace StatueOfColonist
         this.Statue.Data.offset.x = 0.0f;
       Rect rect7;
       // ISSUE: explicit constructor call
-      ((Rect) ref rect7).\u002Ector(150f, y, 200f, 28f);
+      ((Rect) ref rect7).vector(150f, y, 200f, 28f);
       this.Statue.Data.offset.x = Widgets.HorizontalSlider(rect7, this.Statue.Data.offset.x, -2f, 2f, false, this.Statue.Data.offset.x.ToString(), (string) null, (string) null, 0.025f);
       y += 32f;
       Widgets.Label(new Rect(0.0f, y + 2f, 150f, 28f), Translator.Translate("StatueOfColonist.OffsetZOfStatue"));
@@ -308,7 +302,7 @@ namespace StatueOfColonist
         this.Statue.Data.offset.y = 0.0f;
       Rect rect8;
       // ISSUE: explicit constructor call
-      ((Rect) ref rect8).\u002Ector(150f, y, 200f, 28f);
+      ((Rect) ref rect8).vector(150f, y, 200f, 28f);
       this.Statue.Data.offset.y = Widgets.HorizontalSlider(rect8, this.Statue.Data.offset.y, -2f, 2f, false, this.Statue.Data.offset.y.ToString(), (string) null, (string) null, 0.025f);
       y += 32f;
       Widgets.ListSeparator(ref y, ((Rect) ref rect4).width, TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.Apparel")));
@@ -384,7 +378,7 @@ namespace StatueOfColonist
     {
       Rect rect1;
       // ISSUE: explicit constructor call
-      ((Rect) ref rect1).\u002Ector(0.0f, y, width, 28f);
+      ((Rect) ref rect1).vector(0.0f, y, width, 28f);
       Rect rect2 = new Rect(((Rect) ref rect1).width - 24f, y, 24f, 24f);
       TooltipHandler.TipRegion(rect2, TipSignal.op_Implicit(Translator.Translate("StatueOfColonist.RemoveApparel")));
       if (Widgets.ButtonImage(rect2, ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true), true))

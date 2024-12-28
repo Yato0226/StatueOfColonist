@@ -47,7 +47,7 @@ namespace StatueOfColonist
       get
       {
         Vector2 hairMeshSize = this.data.crownType.hairMeshSize;
-        return MeshPool.GetMeshSetForWidth(hairMeshSize.x, hairMeshSize.y);
+        return MeshPool.GetMeshSetForWidth(hairMeshSize.x);
       }
     }
 
@@ -62,9 +62,9 @@ namespace StatueOfColonist
       this.forceResolve = forceResolve;
     }
 
-    public List<Material> MatsBodyBaseAt(Rot4 facing, RotDrawMode bodyCondition = 0)
+public List<Material> MatsBodyBaseAt(Rot4 facing, RotDrawMode bodyCondition = RotDrawMode.Fresh)
     {
-      int num = ((Rot4) ref facing).AsInt + 1000 * bodyCondition;
+      int num = facing.AsInt + 1000 * (int)bodyCondition;
       if (num != this.cachedMatsBodyBaseHash)
       {
         this.cachedMatsBodyBase.Clear();

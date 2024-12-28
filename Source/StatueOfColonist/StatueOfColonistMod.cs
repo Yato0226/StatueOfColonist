@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿﻿// Decompiled with JetBrains decompiler
 // Type: StatueOfColonist.StatueOfColonistMod
 // Assembly: StatueOfColonist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 7D39CEE1-1E34-4063-B520-8223C22194A1
@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
- 
 namespace StatueOfColonist
 {
   public class StatueOfColonistMod : Mod
@@ -56,11 +55,11 @@ namespace StatueOfColonist
 
     public virtual void DoSettingsWindowContents(Rect inRect)
     {
-      float y = ((Rect) ref inRect).y;
+      float y = inRect.y;
       Text.Font = (GameFont) 1;
-      Widgets.CheckboxLabeled(new Rect(((Rect) ref inRect).x, y, 500f, 24f), TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.AutoNameStatue")), ref this.settings.autoName, false, (Texture2D) null, (Texture2D) null, false);
+      Widgets.CheckboxLabeled(new Rect(inRect.x, y, 500f, 24f), Translator.Translate("StatueOfColonist.AutoNameStatue").ToString(), ref this.settings.autoName, false, null, null, false);
       float num1 = y + 32f;
-      Widgets.CheckboxLabeled(new Rect(((Rect) ref inRect).x, num1, 500f, 24f), TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.ShowClothForDisplay")), ref this.settings.showClothForDisplay, false, (Texture2D) null, (Texture2D) null, false);
+      Widgets.CheckboxLabeled(new Rect(inRect.x, num1, 500f, 24f), Translator.Translate("StatueOfColonist.ShowClothForDisplay").ToString(), ref this.settings.showClothForDisplay, false, null, null, false);
       float num2 = num1 + 32f;
       if (!this.isInitBuffers)
       {
@@ -95,15 +94,16 @@ namespace StatueOfColonist
       Text.Anchor = anchor1;
       string str1 = Widgets.TextField(new Rect(400f, num2, 100f, 24f), buffer1);
       this.buffers[0] = str1;
+      bool autoNameValue;
+      if (bool.TryParse(str1, out autoNameValue))
+        this.settings.autoName = autoNameValue; // Update the setting based on the input
       float result1;
       if (str1.IsFullyTypedFloat() && float.TryParse(str1, out result1))
         this.settings.clothIconSize = result1;
       float num3 = num2 + 36f;
-      Rect rect2;
-      // ISSUE: explicit constructor call
-      ((Rect) ref rect2).\u002Ector(((Rect) ref inRect).x, num3, 500f, Text.CalcHeight(TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.ScaleOfCloth")), 500f));
+      Rect rect2 = new Rect(inRect.x, num3, 500f, Text.CalcHeight(Translator.Translate("StatueOfColonist.ScaleOfCloth").ToString(), 500f));
       Widgets.Label(rect2, Translator.Translate("StatueOfColonist.ScaleOfCloth"));
-      float num4 = num3 + (((Rect) ref rect2).height + 4f);
+      float num4 = num3 + (rect2.height + 4f); // Corrected line
       for (int index = 0; index < 5; ++index)
       {
         BodyTypeDef bodyTypeDef = index.ToBodyTypeDef();
@@ -115,11 +115,11 @@ namespace StatueOfColonist
         Widgets.Label(rect3, name);
         Text.Anchor = anchor2;
         string str2 = Widgets.TextField(new Rect(100f, num4, 100f, 24f), buffer2);
+        float result2 = 0; // Declare result2 before usage
+        if (str2.IsFullyTypedFloat() && float.TryParse(str2, out result2))
+          this.settings.SetScaleOfCloth(bodyTypeDef, result2); // Update the setting based on the input
         num4 += 24f;
         this.buffers[index + 1] = str2;
-        float result2;
-        if (str2.IsFullyTypedFloat() && float.TryParse(str2, out result2))
-          this.settings.SetScaleOfCloth(bodyTypeDef, result2);
       }
       float num5 = num4 + 12f;
       string buffer3 = this.buffers[6];
@@ -127,29 +127,25 @@ namespace StatueOfColonist
       TextAnchor anchor3 = Text.Anchor;
       Text.Anchor = (TextAnchor) 3;
       Widgets.Label(rect4, Translator.Translate("StatueOfColonist.StatueFromPreset"));
-      TooltipHandler.TipRegion(rect4, TipSignal.op_Implicit(Translator.Translate("StatueOfColonist.StatueFromPresetDesc")));
+      TooltipHandler.TipRegion(rect4, Translator.Translate("StatueOfColonist.StatueFromPresetDesc"));
       Text.Anchor = anchor3;
       string str3 = Widgets.TextField(new Rect(400f, num5, 100f, 24f), buffer3);
       this.buffers[6] = str3;
-      float result3;
+      float result3 = 0; // Declare result3 before usage
       if (str3.IsFullyTypedFloat() && float.TryParse(str3, out result3))
-        this.settings.possibilityOfStatueFromPreset = result3;
+        this.settings.possibilityOfStatueFromPreset = result3; // Update the setting based on the input
       float num6 = num5 + 36f;
-      Rect rect5;
-      // ISSUE: explicit constructor call
-      ((Rect) ref rect5).\u002Ector(((Rect) ref inRect).x, num6, 500f, Text.CalcHeight(TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.ScaleOfCloth")), 500f));
+      Rect rect5 = new Rect(inRect.x, num6, 500f, Text.CalcHeight(Translator.Translate("StatueOfColonist.ScaleOfCloth").ToString(), 500f));
       Widgets.Label(rect5, Translator.Translate("StatueOfColonist.OffsetStatueBody"));
-      float num7 = num6 + (((Rect) ref rect5).height + 2f);
+      float num7 = num6 + (rect5.height + 2f); // Corrected line
       TextAnchor anchor4 = Text.Anchor;
       Text.Anchor = (TextAnchor) 4;
-      Rect rect6;
-      // ISSUE: explicit constructor call
-      ((Rect) ref rect6).\u002Ector(((Rect) ref inRect).x + 100f, num7, 100f, Text.CalcHeight(TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.OffsetStatueBodyNormal")), 500f));
+      Rect rect6 = new Rect(inRect.x + 100f, num7, 100f, Text.CalcHeight(Translator.Translate("StatueOfColonist.OffsetStatueBodyNormal").ToString(), 500f));
       Widgets.Label(rect6, Translator.Translate("StatueOfColonist.OffsetStatueBodyNormal"));
-      Widgets.Label(new Rect(((Rect) ref inRect).x + 205f, num7, 100f, Text.CalcHeight(TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.OffsetStatueBodyLarge")), 500f)), Translator.Translate("StatueOfColonist.OffsetStatueBodyLarge"));
-      Widgets.Label(new Rect(((Rect) ref inRect).x + 310f, num7, 100f, Text.CalcHeight(TaggedString.op_Implicit(Translator.Translate("StatueOfColonist.OffsetStatueBodyGrand")), 500f)), Translator.Translate("StatueOfColonist.OffsetStatueBodyGrand"));
+      Widgets.Label(new Rect(inRect.x + 205f, num7, 100f, Text.CalcHeight(Translator.Translate("StatueOfColonist.OffsetStatueBodyLarge").ToString(), 500f)), Translator.Translate("StatueOfColonist.OffsetStatueBodyLarge"));
+      Widgets.Label(new Rect(inRect.x + 310f, num7, 100f, Text.CalcHeight(Translator.Translate("StatueOfColonist.OffsetStatueBodyGrand").ToString(), 500f)), Translator.Translate("StatueOfColonist.OffsetStatueBodyGrand"));
       Text.Anchor = anchor4;
-      float num8 = num7 + ((Rect) ref rect6).height;
+      float num8 = num7 + rect6.height;
       for (int index5 = 0; index5 < 5; ++index5)
       {
         BodyTypeDef bodyTypeDef = index5.ToBodyTypeDef();
@@ -163,7 +159,7 @@ namespace StatueOfColonist
         {
           int index7 = index5 * 3 + index6;
           string buffer4 = this.buffers[index7 + 7];
-          string str4 = Widgets.TextField(new Rect((float) (100.0 + (double) index6 * 105.0), num8, 100f, 24f), buffer4);
+          string str4 = Widgets.TextField(new Rect((float)(100.0 + (double)index6 * 105.0), num8, 100f, 24f), buffer4);
           this.buffers[index7 + 7] = str4;
           float result4;
           if (str4.IsFullyTypedFloat() && float.TryParse(str4, out result4))

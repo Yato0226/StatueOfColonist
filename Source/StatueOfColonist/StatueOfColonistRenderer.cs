@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿﻿﻿﻿﻿﻿// Decompiled with JetBrains decompiler
 // Type: StatueOfColonist.StatueOfColonistRenderer
 // Assembly: StatueOfColonist, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 7D39CEE1-1E34-4063-B520-8223C22194A1
@@ -9,6 +9,19 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
+using StatueOfColonist; // Remove duplicate
+
+// Explicitly specify the Object namespace to resolve ambiguity
+using Object = UnityEngine.Object;
+
+namespace StatueOfColonist
+{
+if ((double) horizontalOffset != 0.0 && head.narrow && headFacing.IsHorizontal)
+=======
+if ((double) horizontalOffset != 0.0 && head.narrow && headFacing.IsHorizontal)
+
+// Explicitly specify the Object namespace to resolve ambiguity
+using Object = UnityEngine.Object;
 
  
 namespace StatueOfColonist
@@ -23,11 +36,11 @@ namespace StatueOfColonist
     private const float YOffset_OnHead = 0.03125f;
     public Building_StatueOfColonist parent;
 
-    private RotDrawMode CurRotDrawMode => (RotDrawMode) 0;
+    private RotDrawMode CurRotDrawMode => RotDrawMode.Default; // Ensure this is a valid default value
 
     public StatueOfColonistRenderer(Building_StatueOfColonist parent) => this.parent = parent;
 
-    public void Render(
+    public void Render( // Ensure this method signature is correct
       StatueOfColonistGraphicSet graphics,
       Vector3 rootLoc,
       Quaternion quat,
@@ -63,7 +76,7 @@ namespace StatueOfColonist
       }
       Vector3 vector3_1 = rootLoc;
       Vector3 vector3_2 = rootLoc;
-      if (Rot4.op_Inequality(bodyFacing, Rot4.North))
+        if (!bodyFacing.Equals(Rot4.North))
       {
         vector3_2.y += 7f / 256f;
         vector3_1.y += 3f / 128f;
@@ -78,10 +91,9 @@ namespace StatueOfColonist
       {
         Vector3 vector3_3 = Quaternion.op_Multiply(quat, this.BaseHeadOffsetAt(headFacing, graphics.data.bodyType, raceDef, lifeStageDef));
         headOffset = new Vector3(vector3_3.x, vector3_3.y, vector3_3.z);
-        // ISSUE: explicit constructor call
-        ((Vector3) ref vector3_3).\u002Ector(vector3_3.x * scale, vector3_3.y, vector3_3.z * scale);
+        vector3_3 = new Vector3(vector3_3.x * scale, vector3_3.y, vector3_3.z * scale);
         Material material1 = graphics.HeadMatAt(headFacing, bodyDrawType, headStump);
-        if (Object.op_Inequality((Object) material1, (Object) null))
+        if (material1 != null)
           GenDraw.DrawMeshNowOrLater(this.GetHeadMesh(portrait, raceDef, headFacing, graphics.data.lifeStageDef), Vector3.op_Addition(vector3_2, vector3_3), quat, material1, portrait);
         Vector3 beardLoc = Vector3.op_Addition(rootLoc, vector3_3);
         beardLoc.y += 1f / 32f;
@@ -110,7 +122,7 @@ namespace StatueOfColonist
           }
         }
         PawnRenderFlags flags = (PawnRenderFlags) 0;
-        TryDrawGenes((GeneDrawLayer) 1);
+        TryDrawGenes(GeneDrawLayer.Base);
         if (ModsConfig.IdeologyActive && graphics.faceTattooGraphic != null && bodyDrawType != 2 && (Rot4.op_Inequality(bodyFacing, Rot4.North) || this.parent.Data.faceTattooDef.visibleNorth))
         {
           Vector3 vector3_5 = Vector3.op_Addition(rootLoc, headOffset);
@@ -118,24 +130,24 @@ namespace StatueOfColonist
           vector3_5.y -= 0.00144787633f;
           GenDraw.DrawMeshNowOrLater(this.GetHairMesh(graphics, portrait, raceDef, headFacing, graphics.data.lifeStageDef, graphics.data.crownType), vector3_5, quat, graphics.faceTattooGraphic?.MatAt(headFacing, (Thing) null), PawnRenderFlagsExtension.FlagSet(flags, (PawnRenderFlags) 8));
         }
-        TryDrawGenes((GeneDrawLayer) 2);
+        TryDrawGenes(GeneDrawLayer.Head);
         if ((Rot4.op_Equality(bodyFacing, Rot4.North) ? 1 : (this.parent.Data.beardDef == BeardDefOf.NoBeard ? 1 : 0)) == 0 && bodyDrawType != 2 && !PawnRenderFlagsExtension.FlagSet(flags, (PawnRenderFlags) 2) && this.parent.Data.beardDef != null)
         {
           Vector3 vector3_6 = Vector3.op_Addition(this.OffsetBeardLocationForCrownType(this.parent.Data.beardDef, this.parent.Data.crownType, headFacing, beardLoc), this.parent.Data.beardDef.GetOffset(this.parent.Data.crownType, headFacing));
           Mesh beardMesh = this.GetBeardMesh(graphics, portrait, raceDef, headFacing, graphics.data.lifeStageDef, graphics.data.crownType);
           Material material3 = graphics.beardGraphic?.MatAt(headFacing, (Thing) null);
-          if (Object.op_Inequality((Object) material3, (Object) null))
+        if (material3 != null)
             GenDraw.DrawMeshNowOrLater(beardMesh, vector3_6, quat, material3, PawnRenderFlagsExtension.FlagSet(flags, (PawnRenderFlags) 8));
         }
         if (!flag && bodyDrawType != 2 && !headStump && graphics != null)
         {
           Mesh hairMesh = this.GetHairMesh(graphics, portrait, raceDef, headFacing, graphics.data.lifeStageDef, graphics.data.crownType);
           Material material4 = graphics.HairMatAt(headFacing);
-          if (Object.op_Inequality((Object) hairMesh, (Object) null) && Object.op_Inequality((Object) material4, (Object) null))
+        if (hairMesh != null && material4 != null)
             GenDraw.DrawMeshNowOrLater(hairMesh, beardLoc, quat, material4, portrait);
         }
-        TryDrawGenes((GeneDrawLayer) 3);
-        TryDrawGenes((GeneDrawLayer) 4);
+        TryDrawGenes(GeneDrawLayer.Body);
+        TryDrawGenes(GeneDrawLayer.Hair);
 
         void DrawGene(GeneGraphic geneRecord, GeneDrawLayer layer)
         {
@@ -199,7 +211,7 @@ namespace StatueOfColonist
             return false;
           }));
           Material material = graphic.MatAt(headFacing, (Thing) null);
-          if (Rot4.op_Equality(headFacing, Rot4.South))
+        if (headFacing.Equals(Rot4.South))
           {
             if (woundAnchor1 == null || woundAnchor2 == null)
               return;
@@ -208,7 +220,7 @@ namespace StatueOfColonist
             if (drawRight)
               GenDraw.DrawMeshNowOrLater(MeshPool.GridPlane(Vector2.op_Multiply(Vector2.one, scale_)), Matrix4x4.TRS(Vector3.op_Addition(vector3_1, Quaternion.op_Multiply(quat, woundAnchor2.offset)), quat, Vector3.one), material, PawnRenderFlagsExtension.FlagSet(flags, (PawnRenderFlags) 8));
           }
-          if (Rot4.op_Equality(headFacing, Rot4.East) & drawRight)
+        if (headFacing.Equals(Rot4.East) && drawRight)
           {
             if (woundAnchor2 == null)
               return;
@@ -356,23 +368,19 @@ namespace StatueOfColonist
     {
       Vector2 headOffset = this.GetHeadOffset(rotation, bodyType, raceDef, lifeStageDef);
       Vector3 zero;
-      switch (((Rot4) ref rotation).AsInt)
+switch (rotation.AsInt)
       {
         case 0:
-          // ISSUE: explicit constructor call
-          ((Vector3) ref zero).\u002Ector(0.0f, 0.0f, headOffset.y);
+        zero = new Vector3(0.0f, 0.0f, headOffset.y);
           break;
         case 1:
-          // ISSUE: explicit constructor call
-          ((Vector3) ref zero).\u002Ector(headOffset.x, 0.0f, headOffset.y);
+        zero = new Vector3(headOffset.x, 0.0f, headOffset.y);
           break;
         case 2:
-          // ISSUE: explicit constructor call
-          ((Vector3) ref zero).\u002Ector(0.0f, 0.0f, headOffset.y);
+        zero = new Vector3(0.0f, 0.0f, headOffset.y);
           break;
         case 3:
-          // ISSUE: explicit constructor call
-          ((Vector3) ref zero).\u002Ector(-headOffset.x, 0.0f, headOffset.y);
+        zero = new Vector3(-headOffset.x, 0.0f, headOffset.y);
           break;
         default:
           zero = Vector3.zero;
@@ -443,7 +451,7 @@ namespace StatueOfColonist
           vector3_1.z *= bodyGraphicScale.y;
           Vector3 vector3_2;
           // ISSUE: explicit constructor call
-          ((Vector3) ref vector3_2).\u002Ector(graphicData.drawScale * num, 1f, graphicData.drawScale * num);
+vector3_2 = new Vector3(graphicData.drawScale * num, 1f, graphicData.drawScale * num);
           Matrix4x4 matrix4x4 = Matrix4x4.TRS(Vector3.op_Addition(rootLoc, Vector3Utility.RotatedBy(vector3_1, angle)), quat, vector3_2);
           Material material = geneGraphic.graphic.MatAt(bodyFacing, (Thing) null);
           GenDraw.DrawMeshNowOrLater(Rot4.op_Equality(bodyFacing, Rot4.West) ? MeshPool.GridPlaneFlip(Vector2.one) : MeshPool.GridPlane(Vector2.one), matrix4x4, material, PawnRenderFlagsExtension.FlagSet(flags, (PawnRenderFlags) 8));
